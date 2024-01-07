@@ -26,9 +26,22 @@ function App () {
         album: "Smells Like Teen Spirit",
       }
     ]
-  )
+  );
+  const [playlistName, setPlaylistName] = useState("First playlist");
+  const [playlistTracks, setPlaylistTracks] = useState(
+    [
+      {
+        id: 1,
+        name: "Hey Ya!",
+        artist: "LEOWI & Lucky Luke",
+        album: "Hey Ya!",
+      }
+    ]
+  );
 
-  // TODO: step 36
+  // TODO: step 
+
+  // Add hard-coded values for playlistName and playlistTracks to state in App.js.
 
   return (
     <div>
@@ -39,7 +52,7 @@ function App () {
         <SearchBar />
         <div className="App-playlist">
           <SearchResults userSearchResults={userSearchResults} />
-          <Playlist />
+          <Playlist playlistName={playlistName} playlistTracks={playlistTracks}/>
         </div>
       </div>
     </div>
