@@ -1,21 +1,25 @@
 import React from "react";
 import "./Track.css";
 
-function Track ({ track, isRemoval }) {
+function Track (props) {
   function renderAction() {
-      let button = isRemoval ? 
+      let button = props.isRemoval ? 
       <button className="Track-action">-</button> : 
-      <button className="Track-action">+</button>;
+      <button className="Track-action" onClick={passTrack}>+</button>;
 
       return button;
+  }
+
+  function passTrack() {
+    props.onAdd(props.track);
   }
 
   return (
     <div className="Track">
       <div className="Track-information">
-        <h3>{track.name}</h3>
+        <h3>{props.track.name}</h3>
         
-        <p>{track.artist} | {track.album}</p>
+        <p>{props.track.artist} | {props.track.album}</p>
       </div>
       {renderAction()}
     </div>

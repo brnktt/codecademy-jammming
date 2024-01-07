@@ -39,6 +39,18 @@ function App () {
     ]
   );
 
+  function addTrack(track) {
+    if (playlistTracks.includes(track))
+    {
+      return;
+    }
+
+    let newPlaylistTracks = playlistTracks;
+    newPlaylistTracks.push(track);
+
+    setPlaylistTracks(newPlaylistTracks);
+  };
+
   // TODO: step 
 
   // Add hard-coded values for playlistName and playlistTracks to state in App.js.
@@ -51,7 +63,7 @@ function App () {
       <div className="App">
         <SearchBar />
         <div className="App-playlist">
-          <SearchResults userSearchResults={userSearchResults} />
+          <SearchResults userSearchResults={userSearchResults} onAdd={addTrack}/>
           <Playlist playlistName={playlistName} playlistTracks={playlistTracks}/>
         </div>
       </div>
