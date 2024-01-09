@@ -54,6 +54,10 @@ function App () {
     setPlaylistTracks(newPlaylistTracks);
   };
 
+  function updatePlaylistName(name) {
+    setPlaylistName(name);
+  };
+
   // TODO: step 53
 
   // Add hard-coded values for playlistName and playlistTracks to state in App.js.
@@ -72,7 +76,8 @@ function App () {
           <Playlist 
             playlistName={playlistName} 
             playlistTracks={playlistTracks}
-            onRemove={removeTrack}/>
+            onRemove={removeTrack}
+            onNameChange={updatePlaylistName}/>
         </div>
       </div>
     </div>

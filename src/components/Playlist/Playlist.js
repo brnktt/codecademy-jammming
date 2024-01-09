@@ -3,9 +3,16 @@ import Tracklist from "../TrackList/TrackList";
 import "./Playlist.css";
 
 function Playlist(props) {
+  function handleNameChange(event) {
+    props.onNameChange(event.target.value);
+  };
+
   return (
     <div className="Playlist">
-      <input defaultValue={"New Playlist"} />
+      <input 
+        defaultValue={"New Playlist"}
+        onChange={handleNameChange}
+        value={props.playlistName}/>
       <Tracklist 
         playlistTracks={props.playlistTracks}
         onRemove={props.onRemove}
