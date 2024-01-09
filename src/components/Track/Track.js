@@ -3,16 +3,20 @@ import "./Track.css";
 
 function Track (props) {
   function renderAction() {
-      let button = props.isRemoval ? 
-      <button className="Track-action">-</button> : 
-      <button className="Track-action" onClick={passTrack}>+</button>;
+      let button = props.isRemoval
+      ? <button className="Track-action" onClick={passTrackToRemove}>-</button>
+      : <button className="Track-action" onClick={passTrack}>+</button>;
 
       return button;
-  }
+  };
 
   function passTrack() {
     props.onAdd(props.track);
-  }
+  };
+
+  function passTrackToRemove(track) {
+    props.onRemove(props.track);
+  };
 
   return (
     <div className="Track">

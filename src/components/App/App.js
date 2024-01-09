@@ -48,7 +48,13 @@ function App () {
       : setPlaylistTracks(newPlaylistTracks);
   };
 
-  // TODO: step 46
+  function removeTrack(track) {
+    let newPlaylistTracks = playlistTracks.filter(playlistTrack => playlistTrack.id !== track.id);
+    
+    setPlaylistTracks(newPlaylistTracks);
+  };
+
+  // TODO: step 53
 
   // Add hard-coded values for playlistName and playlistTracks to state in App.js.
 
@@ -60,8 +66,13 @@ function App () {
       <div className="App">
         <SearchBar />
         <div className="App-playlist">
-          <SearchResults userSearchResults={userSearchResults} onAdd={addTrack}/>
-          <Playlist playlistName={playlistName} playlistTracks={playlistTracks}/>
+          <SearchResults 
+            userSearchResults={userSearchResults} 
+            onAdd={addTrack}/>
+          <Playlist 
+            playlistName={playlistName} 
+            playlistTracks={playlistTracks}
+            onRemove={removeTrack}/>
         </div>
       </div>
     </div>
