@@ -5,7 +5,10 @@ import "./SearchResults.css";
 function SearchResults ({ userSearchResults, onAdd }) {
   return (
     <div className="SearchResults">
-      <Tracklist userSearchResults={userSearchResults} onAdd={onAdd} isRemoval={false}/>
+      <Tracklist 
+        playlistTracks={userSearchResults} 
+        onAdd={onAdd} 
+        isRemoval={false}/>
     </div>
   );
 }

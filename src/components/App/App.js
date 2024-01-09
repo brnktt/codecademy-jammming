@@ -40,18 +40,15 @@ function App () {
   );
 
   function addTrack(track) {
-    if (playlistTracks.includes(track))
-    {
-      return;
-    }
+    const foundTrack = playlistTracks.find(playlistTrack => playlistTrack.id === track.id);
+    let newPlaylistTracks = playlistTracks.concat(track);
 
-    let newPlaylistTracks = playlistTracks;
-    newPlaylistTracks.push(track);
-
-    setPlaylistTracks(newPlaylistTracks);
+    foundTrack 
+      ? console.log("Track already exists") 
+      : setPlaylistTracks(newPlaylistTracks);
   };
 
-  // TODO: step 
+  // TODO: step 46
 
   // Add hard-coded values for playlistName and playlistTracks to state in App.js.
 
