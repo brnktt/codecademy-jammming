@@ -62,6 +62,10 @@ function App () {
     const trackURIs = playlistTracks.map(playlistTrack => playlistTrack.uri);
   };
 
+  function search(searchTerm) {
+    console.log(searchTerm);
+  };
+
   // TODO: step 61
 
   // Add hard-coded values for playlistName and playlistTracks to state in App.js.
@@ -72,7 +76,7 @@ function App () {
         Ja<span className="highlight">mmm</span>ing
       </h1>
       <div className="App">
-        <SearchBar />
+        <SearchBar onSearch={search}/>
         <div className="App-playlist">
           <SearchResults 
             userSearchResults={userSearchResults} 
