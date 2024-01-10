@@ -58,7 +58,11 @@ function App () {
     setPlaylistName(name);
   };
 
-  // TODO: step 53
+  function savePlaylist() {
+    const trackURIs = playlistTracks.map(playlistTrack => playlistTrack.uri);
+  };
+
+  // TODO: step 61
 
   // Add hard-coded values for playlistName and playlistTracks to state in App.js.
 
@@ -77,7 +81,8 @@ function App () {
             playlistName={playlistName} 
             playlistTracks={playlistTracks}
             onRemove={removeTrack}
-            onNameChange={updatePlaylistName}/>
+            onNameChange={updatePlaylistName}
+            onSave={savePlaylist}/>
         </div>
       </div>
     </div>
