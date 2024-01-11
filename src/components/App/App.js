@@ -3,68 +3,72 @@ import SearchBar from "../SearchBar/SearchBar";
 import SearchResults from "../SearchResults/SearchResults";
 import Playlist from "../Playlist/Playlist";
 import "./App.css";
+import Spotify from "../../util/Spotify/Spotify";
 
-function App () {
-  const [userSearchResults, setUserSearchResults] = useState(
-    [
-      {
-        id: 0,
-        name: "F.E.E.L.",
-        artist: "Lucky Luke",
-        album: "F.E.E.L.",
-      },
-      {
-        id: 1,
-        name: "Hey Ya!",
-        artist: "LEOWI & Lucky Luke",
-        album: "Hey Ya!",
-      },
-      {
-        id: 2,
-        name: "Smells Like Teen Spirit",
-        artist: "Coopex, Nito-Onna & CPX",
-        album: "Smells Like Teen Spirit",
-      }
-    ]
-  );
+function App() {
+  const [userSearchResults, setUserSearchResults] = useState([
+    {
+      id: 0,
+      name: "F.E.E.L.",
+      artist: "Lucky Luke",
+      album: "F.E.E.L.",
+    },
+    {
+      id: 1,
+      name: "Hey Ya!",
+      artist: "LEOWI & Lucky Luke",
+      album: "Hey Ya!",
+    },
+    {
+      id: 2,
+      name: "Smells Like Teen Spirit",
+      artist: "Coopex, Nito-Onna & CPX",
+      album: "Smells Like Teen Spirit",
+    },
+  ]);
   const [playlistName, setPlaylistName] = useState("First playlist");
-  const [playlistTracks, setPlaylistTracks] = useState(
-    [
-      {
-        id: 1,
-        name: "Hey Ya!",
-        artist: "LEOWI & Lucky Luke",
-        album: "Hey Ya!",
-      }
-    ]
-  );
+  const [playlistTracks, setPlaylistTracks] = useState([
+    {
+      id: 1,
+      name: "Hey Ya!",
+      artist: "LEOWI & Lucky Luke",
+      album: "Hey Ya!",
+    },
+  ]);
 
   function addTrack(track) {
-    const foundTrack = playlistTracks.find(playlistTrack => playlistTrack.id === track.id);
+    const foundTrack = playlistTracks.find(
+      (playlistTrack) => playlistTrack.id === track.id
+    );
     let newPlaylistTracks = playlistTracks.concat(track);
 
-    foundTrack 
-      ? console.log("Track already exists") 
+    foundTrack
+      ? console.log("Track already exists")
       : setPlaylistTracks(newPlaylistTracks);
-  };
+  }
 
   function removeTrack(track) {
-    let newPlaylistTracks = playlistTracks.filter(playlistTrack => playlistTrack.id !== track.id);
-    
+    let newPlaylistTracks = playlistTracks.filter(
+      (playlistTrack) => playlistTrack.id !== track.id
+    );
+
     setPlaylistTracks(newPlaylistTracks);
-  };
+  }
 
   function updatePlaylistName(name) {
     setPlaylistName(name);
-  };
+  }
 
   function savePlaylist() {
-    const trackURIs = playlistTracks.map(playlistTrack => playlistTrack.uri);
-  };
+    const trackURIs = playlistTracks.map((playlistTrack) => playlistTrack.uri);
+  }
 
   function search(searchTerm) {
+    Spotify.search(searchTerm).then((result) => {
+      setUserSearchResults(result);
+    });
     console.log(searchTerm);
-  };
+  }
 
   // TODO: step 79
 
@@ -76,17 +80,19 @@ function App () {
         Ja<span className="highlight">mmm</span>ing
       </h1>
       <div className="App">
-        <SearchBar onSearch={search}/>
+        <SearchBar onSearch={search} />
         <div className="App-playlist">
-          <SearchResults 
-            userSearchResults={userSearchResults} 
-            onAdd={addTrack}/>
-          <Playlist 
-            playlistName={playlistName} 
+          <SearchResults
+            userSearchResults={userSearchResults}
+            onAdd={addTrack}
+          />
+          <Playlist
+            playlistName={playlistName}
             playlistTracks={playlistTracks}
             onRemove={removeTrack}
             onNameChange={updatePlaylistName}
-            onSave={savePlaylist}/>
+            onSave={savePlaylist}
+          />
         </div>
       </div>
     </div>
