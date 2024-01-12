@@ -6,35 +6,9 @@ import "./App.css";
 import Spotify from "../../util/Spotify/Spotify";
 
 function App() {
-  const [userSearchResults, setUserSearchResults] = useState([
-    {
-      id: 0,
-      name: "F.E.E.L.",
-      artist: "Lucky Luke",
-      album: "F.E.E.L.",
-    },
-    {
-      id: 1,
-      name: "Hey Ya!",
-      artist: "LEOWI & Lucky Luke",
-      album: "Hey Ya!",
-    },
-    {
-      id: 2,
-      name: "Smells Like Teen Spirit",
-      artist: "Coopex, Nito-Onna & CPX",
-      album: "Smells Like Teen Spirit",
-    },
-  ]);
-  const [playlistName, setPlaylistName] = useState("First playlist");
-  const [playlistTracks, setPlaylistTracks] = useState([
-    {
-      id: 1,
-      name: "Hey Ya!",
-      artist: "LEOWI & Lucky Luke",
-      album: "Hey Ya!",
-    },
-  ]);
+  const [userSearchResults, setUserSearchResults] = useState([]);
+  const [playlistName, setPlaylistName] = useState("New Playlist");
+  const [playlistTracks, setPlaylistTracks] = useState([]);
 
   function addTrack(track) {
     const foundTrack = playlistTracks.find(
@@ -61,6 +35,11 @@ function App() {
 
   function savePlaylist() {
     const trackURIs = playlistTracks.map((playlistTrack) => playlistTrack.uri);
+    const name = playlistName;
+    Spotify.savePlaylist(name, trackURIs).then(() => {
+      setPlaylistName("New Playlist");
+      setPlaylistTracks([]);
+    });
   }
 
   function search(searchTerm) {
@@ -69,10 +48,6 @@ function App() {
     });
     console.log(searchTerm);
   }
-
-  // TODO: step 79
-
-  // Add hard-coded values for playlistName and playlistTracks to state in App.js.
 
   return (
     <div>
