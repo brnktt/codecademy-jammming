@@ -1,6 +1,7 @@
 let accessToken = "";
 const clientID = "3bced3813632475bb5dc9ab1e95a2895";
-const redirectUrl = "http://localhost:3000/";
+// const redirectUrl = "http://localhost:3000/";
+const redirectUrl = "https://brnktt.github.io/codecademy-jammming/";
 
 const Spotify = {
   getAccessToken() {
