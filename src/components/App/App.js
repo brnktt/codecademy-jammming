@@ -47,6 +47,48 @@ function App() {
       setUserSearchResults(result);
     });
     console.log(searchTerm);
+
+    Spotify.searchPlaylists(searchTerm).then((result) => {
+      console.log(`result - ${JSON.stringify(result)}`);
+
+      if (result) {
+        // JSON
+        // const element = document.createElement("a");
+        // const textFile = new Blob([JSON.stringify(result)], {
+        //   type: "text/json",
+        // }); //pass data from localStorage API to blob
+        // element.href = URL.createObjectURL(textFile);
+        // element.download = `${searchTerm}.json`;
+        // document.body.appendChild(element);
+        // element.click();
+
+        // CSV
+        // Convert array of objects to CSV content
+        const csvContent = result.map((playlist) =>
+          Object.values(playlist)
+            .map((value) => `"${value}"`)
+            .join(",")
+        );
+
+        // Add header row
+        const header = Object.keys(result[0]).join(",");
+        csvContent.unshift(header);
+
+        // Create a Blob with the CSV content
+        const csvBlob = new Blob([csvContent.join("\n")], {
+          type: "text/csv",
+        });
+
+        // Create a download link
+        const element = document.createElement("a");
+        element.href = URL.createObjectURL(csvBlob);
+        element.download = `${searchTerm}.csv`;
+
+        // Append the link to the document and trigger a click to download
+        document.body.appendChild(element);
+        element.click();
+      }
+    });
   }
 
   return (
